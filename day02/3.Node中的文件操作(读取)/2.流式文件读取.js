@@ -3,24 +3,42 @@
 *     fs.createReadStream(path[, options])
 *       --path:要读取的文件路径+文件名
 *       --options：配置对象（可选）
+*           --flags:
+*           --encoding:
+*           --fd:
+*           --mode:
+*           --autoClose:
+*           --start:读取的起始位置
+*           --end:读取的结束位置
+*           --highWaterMark : 每次读取文件的大小
 * */
 
 let fs = require('fs')
 //创建一个可读流
-let rs = fs.createReadStream('./music.mp3')
+let rs = fs.createReadStream('./test.mp4',{
+  highWaterMark:1024 * 1024 //每次读取1MB,控制“水管的粗细”
+})
+//创建一个可写流
+let ws = fs.createWriteStream('../test/music2.mp3')
 
-//给流绑定监听
+//给流绑定监听------可读流不用手动的关闭或打开
 rs.on('open',function () {
   console.log('可读流打开了')
 })
 rs.on('close',function () {
   console.log('可读流关闭了')
+  ws.close()
+})
+ws.on('open',function () {
+  console.log('可写流打开了')
+})
+ws.on('close',function () {
+  console.log('可写流关闭了')
 })
 
-console.log(rs.read(0));
-
 //给可读流绑定一个data事件，会自动触发可读流读取数据
-/*
-rs.on('data',function (err,data) {
-  console.log(1)
-})*/
+rs.on('data',function (data) {
+  //流式文件写入
+  console.log(data.length)
+  ws.write(data)
+})
