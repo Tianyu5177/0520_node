@@ -1,5 +1,5 @@
 /*
-* 该模块用于：创建students模型
+* 该模块用于：创建teachers模型
 * */
 let mongoose = require('mongoose')
 
