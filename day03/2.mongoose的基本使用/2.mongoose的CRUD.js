@@ -72,21 +72,67 @@ let dbPromise = new Promise(function (resolve,reject) {
   let stuModel = mongoose.model('students2',stuSchema) //第一个参数就是数据库中集合的名字，第二个参数是“规则”
   //模型对象身上有着所有CRUD的API
 
-  //添加一条数据
-  stuModel.create({
-    stu_id:'20190821004',
-    name:'老刘',
-    age:92,
+  //添加一条数据-----传回调函数
+  /*let result = stuModel.create({
+    stu_id:'20190821009',
+    name:'佩奇3',
+    age:82,
     sex:'男',
     info:222222,
-    hobby:['女','吃饭','抽烟','烫头'],
+    hobby:['男','吃饭','抽烟','烫头'],
   },function (err,data) {
+    console.log(err,data)
+  })
+  console.log(result)//undefined*/
+
+  //添加一条数据-----不传回调函数,返回的是Promise的实例，一般来说编码人员会检测Promise实例的状态
+  /*let createPromise = stuModel.create({
+    stu_id:'20190821012',
+    name:'佩奇3',
+    age:82,
+    sex:'男',
+    info:222222,
+    hobby:['男','吃饭','抽烟','烫头'],
+  })
+
+  createPromise.then((data)=>{
+    console.log('@@',data)
+  },(err)=>{
+    console.log(err)
+  })*/
+
+  //查询数据 ------ find方法，无论是否查找到，无论数据有多少条，一定返回一个数组
+  /*stuModel.find({age:250},function (err,data) {
     if(!err){
-      console.log('数据写入成功',data)
+      console.log(data)
     }else{
       console.log(err)
     }
+  })*/
+  /*let a = stuModel.find({age:25})
+  let result = await a
+  console.log(result)*/
+  /*stuModel.find({age:25},{name:1,sex:1,_id:0},function (err,data) {
+    if(!err){
+      console.log(data)
+    }else{
+      console.log(err)
+    }
+  })*/
+
+  //更新数据
+  /*stuModel.updateMany({age:82},{sex:'猪'},function (err,data) {
+    console.log(data)
   })
+*/
+
+  //删除
+  stuModel.deleteMany({age:82},function (err,data) {
+    console.log(data)
+  })
+
+
+
 })()
 
 
