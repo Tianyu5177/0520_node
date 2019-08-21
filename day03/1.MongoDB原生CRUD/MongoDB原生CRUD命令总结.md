@@ -1,6 +1,6 @@
 ##MongoDB原生CRUD（增删改查）命令总结
 
--C creat：
+-C creat（新增数据）：
 
     db.集合名.insert(文档对象)
     db.集合名.insertOne(文档对象)
