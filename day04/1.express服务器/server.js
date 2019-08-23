@@ -9,7 +9,6 @@ let express = require('express')
 let app = express()
 
 //第一个参数：请求匹配的路由，第二个参数：回调函数
-
 //根路由（后端路由）
 app.get('/',function (request,response) {
   //什么时候能进入该回调函数？
@@ -21,6 +20,7 @@ app.get('/',function (request,response) {
 
 //一级路由
 app.get('/meishi',function (request,response) {
+  console.log(a)
   response.send('我是美食界面')
 })
 
@@ -30,18 +30,18 @@ app.get('/meishi/huoguo',function (request,response) {
 })
 
 //根路由--响应的是post请求
-app.post('/demo',function (request,response) {
+app.get('/demo',function (request,response) {
   console.log(request.body); //获取post请求的请求体参数,还需要一个中间件的配合
   response.send('我是给你的响应，你发过来的是POST请求')
 })
 
-app.get('/shenghuo',function (request,response) {
-  response.send('ok')
+app.post('/shenghuo',function (request,response) {
+  response.send('我是一些数据')
 })
-
 
 //绑定端口
 app.listen(3000,function (err) {
   if(!err) console.log('服务器启动成功了')
   else console.log(err)
 })
+
