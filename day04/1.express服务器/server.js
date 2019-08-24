@@ -35,7 +35,8 @@ app.get('/demo',function (request,response) {
   response.send('我是给你的响应，你发过来的是POST请求')
 })
 
-app.post('/shenghuo',function (request,response) {
+app.get('/shenghuo',function (request,response) {
+  console.log(request.query);
   response.send('我是一些数据')
 })
 
