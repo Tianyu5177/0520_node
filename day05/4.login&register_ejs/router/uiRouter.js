@@ -10,14 +10,14 @@ let router = new Router()
 
 //注册UI路由--登录
 router.get('/login',(request,response)=>{
-  let filePath = resolve(__dirname,'../public/login.html')
-  response.sendFile(filePath)
+  let {email} = request.query
+
+  response.render('login',{errMsg:{email}})
 })
 
 //注册UI路由--注册
 router.get('/register',(request,response)=>{
-  let filePath = resolve(__dirname,'../public/register.html')
-  response.sendFile(filePath)
+  response.render('register',{errMsg:{}})
 })
 
 module.exports = router

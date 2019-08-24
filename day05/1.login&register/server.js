@@ -66,7 +66,7 @@ db.then(()=>{
       }
     }
     catch(err){
-      //1.引入计数模块 2.引入报警模块
+      //1.引入错误计数模块 2.引入报警模块
       console.log(err)
       response.send('网络不稳定，稍后重试')
     }
