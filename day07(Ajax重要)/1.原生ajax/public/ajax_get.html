@@ -58,7 +58,7 @@
     }
 
     //3.指定发送请求的：方式、地址、参数
-    xhr.open('get','http://localhost:3000/test_get?name=zhangsan&age=18')
+    xhr.open('get','http://localhost:3000/test_get?t='+Date.now()+'name=zhangsan&age=18')
 
     //4.发送请求
     xhr.send()
