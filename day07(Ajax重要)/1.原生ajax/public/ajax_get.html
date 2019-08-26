@@ -27,12 +27,30 @@
     xhr.onreadystatechange = function () {
       /*
       * xhr内部有五种状态：
-      *     0：初始化
-      *     1：？
-      *     2：
-      *     3
+      *     0：初始化,xhr对象在实例出来的那一刻就是0
+      *     1：请求还没有发出去，即：send方法还没有被调用，可以修改请求头。
+      *     2：请求已经发出去了，即：send方法已经被调用了，不能修改请求头里的任何信息，而且响应首行和响应头已经回来了
+      *     3：有一部分数据回来了（若是小数据，在此阶段完整接收完毕了，若是比较大的数据，有待于进一步接收）
       *     4：数据完美的回来了
       * */
+      //几乎不会在0、1、2、3这些状态里做任何逻辑
+      /*if(xhr.readyState === 0){
+        console.log('我的内部状态是0')
+      }*/
+      /*if(xhr.readyState === 1){
+        xhr.setRequestHeader('demo',123)
+        console.log('我的内部状态是1')
+      }*/
+      /*if(xhr.readyState === 2){
+        //xhr.setRequestHeader('demo',123)
+        console.log(xhr.getResponseHeader('Date'))
+        console.log(xhr.response)
+        console.log('我的内部状态是2')
+      }*/
+      /*if(xhr.readyState === 3){
+        console.log(xhr.response)
+        console.log('我的内部状态是3')
+      }*/
       if(xhr.readyState === 4 && xhr.status === 200){
         console.log(xhr.response);
         document.getElementById('demo').innerHTML = xhr.response
