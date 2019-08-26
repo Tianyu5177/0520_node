@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>原生js的Ajax-GET</title>
+</head>
+<body>
+<h2>该页面是练习：使用原生js发送Ajax-GET</h2>
+<button id="btn">点我使用原生js发送Ajax-GET请求</button>
+<div id="demo"></div>
+
+<script type="text/javascript">
+  
+  let btn = document.getElementById('btn')
+  btn.onclick = function () {
+    /*
+  * 1.实例化一个XMLHttpRequest对象，名为：xhr
+  * 2.给上一步实例化出来的对象绑定监听，名为：onreadystatechange
+  * 3.指定发送请求的：方式、地址、参数
+  * 4.发送请求
+  * */
+
+    //1.实例化一个XMLHttpRequest对象，名为：xhr
+    let xhr = new XMLHttpRequest()
+
+    //2.给上一步实例化出来的对象绑定监听，名为：onreadystatechange
+    xhr.onreadystatechange = function () {
+      /*
+      * xhr内部有五种状态：
+      *     0：初始化
+      *     1：？
+      *     2：
+      *     3
+      *     4：数据完美的回来了
+      * */
+      if(xhr.readyState === 4 && xhr.status === 200){
+        console.log(xhr.response);
+        document.getElementById('demo').innerHTML = xhr.response
+      }
+    }
+
+    //3.指定发送请求的：方式、地址、参数
+    xhr.open('get','http://localhost:3000/test_get?name=zhangsan&age=18')
+
+    //4.发送请求
+    xhr.send()
+  }
+  
+</script>
+
+</body>
+</html>
