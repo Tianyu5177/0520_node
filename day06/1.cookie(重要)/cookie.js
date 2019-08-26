@@ -26,28 +26,39 @@
 let express = require('express')
 
 let app = express()
+let cookieParser = require('cookie-parser')
 //隐藏服务器内部实现
 app.disable('x-powered-by')
+app.use(cookieParser())
 
 //test1路由负责给客户端“种”一个cookie
 app.get('/test1',(request,response)=>{
-  /*
-  * 在express中，给客户端“种”下一个cookie，不用借助任何第三方库
-  * */
-  //向客户端种下一个会话cookie
+  //在express中，给客户端“种”下一个cookie，不用借助任何第三方库
+
+  //1.向客户端种下一个会话cookie
   //response.cookie('demo',123)
 
-  //向客户端种下一个持久化cookie
+  //2.向客户端种下一个持久化cookie,有效期是一分钟
   response.cookie('demo',123,{maxAge:60*1000})
-  response.send('test1--ok')
+  //给客户端响应数据
+  response.send('我给你种下了一个cookie，你快看看')
 })
 
+//test1路由负责读取客户端携带过了来的cookie
 app.get('/test2',(request,response)=>{
-  response.send('test2--ok')
+  //在express中，如果想获取客户端携带过来的cookie，借助一个第三方库
+  console.log(request.cookies);
+  response.send('我已经拿到了你带过来的cokkie')
 })
 
+//test3路由负责告诉客户端删除一个cookie
 app.get('/test3',(request,response)=>{
-  response.send('test3--ok')
+  //第一种
+  //response.clearCookie('demo')
+
+  //第二种
+  response.cookie('demo','',{maxAge:0})
+  response.send('我删除了你所保存的cookie')
 })
 
 
