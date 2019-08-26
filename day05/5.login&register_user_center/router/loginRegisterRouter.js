@@ -56,7 +56,7 @@ router.post('/register',async(request,response)=>{
   */
   try {
     //4.查询该邮箱是否注册过
-    let findResult = await usersModel.findOne2({email})
+    let findResult = await usersModel.findOne({email})
     if(findResult){
       errMsg.emailErr = '该邮箱已经注册过，请更换'
       response.render('register',{errMsg})
@@ -109,8 +109,8 @@ router.post('/login',async(request,response)=>{
   try {
     let result = await usersModel.findOne({email,pwd})
     if(result){
-      //response.render('user_center',{nickName:result.nick_name})
-      response.redirect(`/user_center?nick_name=${result.nick_name}`)
+      response.render('user_center',{nickName:result.nick_name})
+      //response.redirect(`/user_center?nick_name=${result.nick_name}`)
     }else{
       errMsg.loginErr = '登陆失败，邮箱或密码错误'
       console.log(errMsg)
