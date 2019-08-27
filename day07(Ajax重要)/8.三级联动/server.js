@@ -40,7 +40,7 @@ db.then(()=>{
     let {province} = request.query
     let {city} = request.query
     try{
-      let result = await citiesModel.find({level:3,province,city})
+      let result = await citiesModel.find({level:3,province,city},{name:1,code:1,_id:0})
       response.set('Access-Control-Allow-Origin', '*');
       response.send({state:1,data:result})
     }
