@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>promise封装原生Ajax</title>
+</head>
+<body>
+<button id="btn">点我</button>
+
+<script type="text/javascript">
+  let btn = document.getElementById('btn')
+  
+  btn.onclick = function () {
+    sendAjax('post','http://localhost:3000/test_get',{name:'zhangsan',age:18})
+  }
+  
+
+  /**
+   * @param method:发送请求的方式
+   * @param url：请求地址
+   * @param data：请求携带的数据，以对象的形式携带过来
+   * @author:tianyu
+   */
+  function sendAjax(method,url,data) {
+    //实例化一个xhr
+    let xhr = new XMLHttpRequest()
+    //绑定监听
+    xhr.onreadystatechange = function () {
+      if(xhr.readyState === 4 && xhr.status === 200){
+        console.log(xhr.response)
+      }
+    }
+    //将传递过来的对象数据，加工成urlencoded编码的字符串
+    //{name:'zhangsan',age:18}  => name=zhangsan&age=18
+    let str = ''
+    let keyArr = Object.keys(data)
+    let params = keyArr.reduce(function (pre,now) {
+      return pre+`${now}=${data[now]}&`
+    },str)
+    console.log(params);
+
+  }
+  
+  
+  
+</script>
+
+</body>
+</html>

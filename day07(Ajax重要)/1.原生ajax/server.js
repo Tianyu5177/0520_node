@@ -19,6 +19,7 @@ app.listen(3000,function (err) {
     console.log('服务器启动成功')
     console.log('测试原生js发送Ajax-GET请求的地址为：http://localhost:3000/ajax_get.html')
     console.log('测试原生js发送Ajax-POST请求的地址为：http://localhost:3000/ajax_post.html')
+    console.log('测试原生promise封装原生Ajax：http://localhost:3000/ajax_with_promise.html')
     console.log('禁止通过编译器去打开网页！！！！！！')
   }
   else console.log(err)
