@@ -5,6 +5,15 @@ app.use(express.urlencoded({extended:true}))
 
 app.get('/test_get',(request,response)=>{
   let {callback} = request.query
+  console.log(request.query)
+  let personArr = [{name:'kobe',age:18},{name:'wade',age:19},{name:'peiqi',age:20}]
+  console.log('有人请求我的了，发给我的参数是：',request.query);
+  response.send(`${callback}(${JSON.stringify(personArr)})`)
+})
+
+app.post('/test_post',(request,response)=>{
+  let {callback} = request.query
+  console.log(request.query)
   let personArr = [{name:'kobe',age:18},{name:'wade',age:19},{name:'peiqi',age:20}]
   console.log('有人请求我的了，发给我的参数是：',request.query);
   response.send(`${callback}(${JSON.stringify(personArr)})`)
