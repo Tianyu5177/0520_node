@@ -8,6 +8,14 @@
 <h2>该页面是测试：jQuery封装的Ajax</h2>
 <button id="btn1">点我使用jQuery发送Ajax-GET</button>
 <button id="btn2">点我使用jQuery发送Ajax-POST</button>
+
+<form action="http://localhost:3000/test_get?name=kobe&age=18" method="get">
+  <input type="submit">
+</form>
+
+
+
+
 <script type="text/javascript" src="./js/jquery-1.12.4.js"></script>
 
 <script type="text/javascript">
@@ -35,7 +43,7 @@
     })*/
     
     //简写：
-    $.get('http://localhost:3000/test_get1',{name:'zhansgan',age:18},function (data) {
+    $.get('http://localhost:3000/test_get',{name:'zhansgan',age:18},function (data) {
       console.log(data)
     })
     

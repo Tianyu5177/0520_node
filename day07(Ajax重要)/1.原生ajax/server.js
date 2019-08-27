@@ -5,8 +5,10 @@ app.use(express.static('./public'))
 app.use(express.urlencoded({extended:true}))
 
 app.get('/test_get',(request,response)=>{
-  console.log(request.query);
-  response.send('你发来的是GET请求，我是响应的数据')
+  setTimeout(()=>{
+    console.log(request.query);
+    response.send('你发来的是GET请求，我是响应的数据')
+  },1000)
 })
 
 app.post('/test_post',(request,response)=>{

@@ -5,7 +5,7 @@ app.use(express.static('./public'))
 app.use(express.urlencoded({extended:true}))
 
 app.get('/test_get',(request,response)=>{
-  console.log(request.query);
+  console.log('有人请求我的了，发给我的参数是：',request.query);
   response.send('你发来的是GET请求，我是响应的数据')
 })
 
