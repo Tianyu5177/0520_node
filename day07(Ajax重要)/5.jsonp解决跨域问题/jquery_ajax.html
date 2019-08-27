@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsonp解决跨域</title>
+</head>
+<body>
+<h2>该页面是测试：jsonp解决跨域</h2>
+<button id="btn">点我</button>
+
+<script type="text/javascript">
+  /*
+  * jsonp解决跨域
+  *     1.构建出一个script节点
+  *     2.指定节点的src属性
+  *     3.定义好全局的回调函数
+  *     4.将script节点添加到body中
+  *
+  * 备注：
+  *     1.原理是：利用了html标签请求不受同源策略的限制（天然跨域）
+  *     2.需要后端人员配合
+  *     3.弊端：不能够解决post请求跨域的问题
+  * */
+  let btn = document.getElementById('btn')
+  btn.onclick = function () {
+    let scriptNode = document.createElement('script')
+    scriptNode.src = 'http://localhost:3000/test_get?callback=demo2'
+    window.demo2 = function (a) {
+      console.log(a)
+    }
+    document.body.appendChild(scriptNode)
+    document.body.removeChild(scriptNode)
+  }
+  
+</script>
+
+
+</body>
+</html>
